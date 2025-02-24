@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Search and Add</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #search-container {
+            margin-bottom: 20px;
+        }
+
+        #search-bar {
+            width: 300px;
+            padding: 10px;
+            border: 2px solid gray;
+            border-radius: 5px;
+        }
+
+        #fruit-list {
+            list-style-type: none;
+            padding: 0;
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .fruit-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: lightyellow;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+        .fruit-item button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .edit-button {
+            background-color: lightblue;
+        }
+
+        .delete-button {
+            background-color: tomato;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="search-container">
+        <input id="search-bar" type="text" placeholder="Search for a fruit..." />
+        <button id="search-button">Search/Add</button>
+    </div>
+    <ul id="fruit-list">
+        <li class="fruit-item">
+            Banana
+            <div>
+                <button class="edit-button">Edit</button>
+                <button class="delete-button">Delete</button>
+            </div>
+        </li>
+        <li class="fruit-item">
+            Apple
+            <div>
+                <button class="edit-button">Edit</button>
+                <button class="delete-button">Delete</button>
+            </div>
+        </li>
+        <li class="fruit-item">
+            Strawberry
+            <div>
+                <button class="edit-button">Edit</button>
+                <button class="delete-button">Delete</button>
+            </div>
+        </li>
+    </ul>
+
+    <script>
+        // JavaScript to handle search and add
+        const searchBar = document.querySelector('#search-bar');
+        const searchButton = document.querySelector('#search-button');
+        const fruitList = document.querySelector('#fruit-list');
+
+        searchButton.addEventListener('click', function () {
+            const searchTerm = searchBar.value.trim(); // Get user input
+            if (!searchTerm) return; // Do nothing if input is empty
+
+            const fruits = Array.from(fruitList.children).map(li => li.textContent.trim().split('\n')[0]);
+
+            if (fruits.includes(searchTerm)) {
+                alert(`${searchTerm} is already in the list!`);
+            } else {
+                // Ask the user for confirmation before adding
+                const confirmAdd = confirm(`${searchTerm} is not in the list. Do you want to add it?`);
+                if (confirmAdd) {
+                    addFruit(searchTerm); // Add the fruit if the user confirms
+                } else {
+                    alert(`${searchTerm} was not added to the list.`);
+                }
+            }
+
+            searchBar.value = ''; // Clear the input
+        });
+
+
+        // Function to add a fruit to the list
+        function addFruit(fruitName) {
+            const li = document.createElement('li');
+            li.className = 'fruit-item';
+
+            li.innerHTML = `
+                ${fruitName}
+                <div>
+                    <button class="edit-button">Edit</button>
+                    <button class="delete-button">Delete</button>
+                </div>
+            `;
+
+            // Append the new fruit to the list
+            fruitList.appendChild(li);
+        }
+
+        // Delegated event listener for delete functionality
+        fruitList.addEventListener('click', function(event) {
+            if (event.target.classList.contains('delete-button')) {
+                const li = event.target.closest('.fruit-item');
+                li.remove();
+            }
+        });
+
+        // Delegated event listener for edit functionality
+        fruitList.addEventListener('click', function(event) {
+            if (event.target.classList.contains('edit-button')) {
+                const li = event.target.closest('.fruit-item');
+                const fruitName = li.firstChild.textContent.trim();
+                const newName = prompt('Edit fruit name:', fruitName);
+                if (newName) {
+                    li.firstChild.textContent = newName;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

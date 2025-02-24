@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form with Local Storage</title>
+</head>
+<body>
+  <form id="userForm">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" required />
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required />
+    <label for="phone">Phone No</label>
+    <input type="tel" name="phone" id="phone" required />
+    <button type="submit">Submit</button>
+  </form>
+  <script src="storage.js"></script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with local storage</title>
+</head>
+<body style="margin: 0;">
+    <form id="storage_form">
+        <label for="username">Username:</label>
+        <input type="text" id="username"><br>
+        <label>Email:<input type="text" id="email"></label><br>
+        <label>Mobile Number:<input type="tel" id="number_phone"></label><br>
+        <button type="submit" id="button">Submit</button>
+    </form>
+    <script src="storage.js"></script> -->
+    <!-- <script>
+        const myObject = { name: "Dominic", age: 56 }; // Create an object
+        console.log(myObject.name);
+        const myObjectSerialized = JSON.stringify(myObject); // Convert to a string
+        console.log(myObjectSerialized);
+        localStorage.setItem("myObject", myObjectSerialized); // Store in Local Storage
+        const storedData = localStorage.getItem("myObject"); // Retrieve the string
+        const myObjectDeserialized = JSON.parse(storedData); // Convert back to an object
+        console.log(myObjectDeserialized); // Access properties like a normal object
+        console.log(myObjectDeserialized.name); // Output: Dominic
+        console.log(myObjectDeserialized.age); // Output: 56
+    </script>
+</body>
+</html> -->
